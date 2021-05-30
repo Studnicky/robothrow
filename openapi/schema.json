@@ -1,0 +1,204 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "roboThrow",
+        "description": "This guide provides an API specification for the robo-throw project.\n\n---\n\n### OpenAPI v3\n\nYou can view and download this API specification as a raw JSON document here: [OpenAPI v3 Document](http://localhost:3000/schema)\n\nThe document adheres to the [OpenAPI v3](https://swagger.io/specification/) specification.\n\nThere is a large ecosystem or open source tools that support the OpenAPI v3 specification, a list of which may be found here: [OpenApi Tools](https://openapi.tools/)\n\nFor example, the JSON document may be imported into Postman to create a functional test suite:\n- [OpenApi Postman Suite](https://github.com/postmanlabs/openapi-to-postman)\n\n---\n",
+        "version": "0.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:{port}",
+            "description": "Local Server",
+            "variables": {
+                "port": {
+                    "enum": [
+                        "3000"
+                    ],
+                    "default": "3000"
+                }
+            }
+        }
+    ],
+    "paths": {
+        "/trajectory": {
+            "get": {
+                "summary": "Get Account",
+                "description": "\n### Fetch a trajectory for a given args state\n\nExpected to return a Trajectory Instance\n\n### Requirements\n- Must include release angle\n- Must include release velocity\n",
+                "tags": [
+                    "Trajectory"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/trajectoryResponse"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/releaseAngleQuery"
+                    },
+                    {
+                        "$ref": "#/components/parameters/releaseVelocityQuery"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "callbacks": {},
+        "examples": {
+            "initialState": {
+                "INITIALSTATE": {
+                    "summary": "Intial State",
+                    "value": {}
+                }
+            }
+        },
+        "headers": {},
+        "links": {},
+        "parameters": {
+            "releaseAngleQuery": {
+                "name": "releaseAngle",
+                "description": "Release Angle",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "number"
+                }
+            },
+            "releaseVelocityQuery": {
+                "name": "releaseVelocity",
+                "description": "Release Velocity",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "number"
+                }
+            }
+        },
+        "requestBodies": {},
+        "responses": {
+            "trajectoryResponse": {
+                "description": "Get Trajectory",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/components/schemas/trajectory"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "INITIALSTATE": {
+                                "summary": "Intial State",
+                                "value": {
+                                    "data": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "unknownResponse": {
+                "description": "Unknown Response",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "example": {
+                            "message": "Unknown Error"
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "trajectory": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "$id": "/trajectory",
+                "title": "Trajectory",
+                "type": "object",
+                "properties": {
+                    "angle": {
+                        "type": "number",
+                        "description": "Release Angle"
+                    },
+                    "velocity": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Release Velocity"
+                    },
+                    "createdAt": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "format": "date-time",
+                        "description": "Datetime of Launch"
+                    }
+                },
+                "required": []
+            },
+            "error": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "$id": "/error",
+                "title": "Error Response",
+                "description": "API error response",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "oneOf": [
+                            {
+                                "description": "List Not Found",
+                                "type": "array",
+                                "items": {
+                                    "items": {
+                                        "type": "Object",
+                                        "properties": {}
+                                    }
+                                }
+                            },
+                            {
+                                "description": "Object Not Found",
+                                "type": "Object",
+                                "properties": {}
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "User token authentication (Bearer)": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [],
+    "tags": [],
+    "externalDocs": []
+}
