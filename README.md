@@ -62,10 +62,13 @@ npm start
 For more advanced usage, such as running with command line arguments, follow these additional steps:
 
     1. Make the project source executable locally
+
 ```bash
 chmod +x ./src/index.js
 ```
+
     2. Execute with command line args by addressing the source executable directly
+
 ```bash
 ./src/index.js --importPath=../target
 ```

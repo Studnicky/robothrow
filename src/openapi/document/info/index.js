@@ -1,11 +1,21 @@
+const fs = require('fs');
+const path = require('path');
 const { URL } = require('url');
-const config = require('../../config');
 
 //  The basic info for the swagger can come from the package.json && process.env
-const { name, version } = require('../../config');
+const config = require('../../../../config');
+
+const rootPath = path.dirname(require.main.filename);
+const readMePath = path.resolve(rootPath, '../', 'README.md');
+const readme = fs.readFileSync(readMePath, 'utf-8');
+
 const sourceDocumentUrl = new URL(`${config.openapi.schemaFileName}`, `http://${config.express.host}:${config.express.port}`);
 
-const openApiDescription = `This guide provides an API specification for the robo-throw project.
+const openApiDescription = `
+
+This guide provides an API specification for the ${config.name} project.
+
+${readme}
 
 ---
 
@@ -24,10 +34,10 @@ For example, the JSON document may be imported into Postman to create a function
 `;
 
 module.exports = {
-	title: name,
+	title: config.name,
 	description: openApiDescription,
 	// termsOfService: 'https://tosdr.org/', //  URL to the terms of service?
 	// contact: contributors[0],
 	// license: convertNPMLicenseToSwagger(license),
-	version: version
+	version: config.version
 };

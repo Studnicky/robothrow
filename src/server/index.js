@@ -12,11 +12,11 @@ const openapi = require('../openapi');
 const app = express();
 app.logger = logger;
 
-openapi.exportJson().then(() => {
+openapi.exportDocument().then(() => {
 	//  https://www.npmjs.com/package/swagger-ui-express
 	app.get(`/trajectory`, routes.trajectory);
 	app.get(`/${config.openapi.schemaFileName}`, routes.serveOpenApiDoc);
-	app.get('/', swaggerUi.serve, swaggerUi.setup(openapi.document));
+	app.use('/', swaggerUi.serve, swaggerUi.setup(openapi.document));
 
 	const server = app.listen(config.express.port, () => {
 		app.logger.info(`${config.name} [${config.env}] API running on ${config.express.host}:${config.express.port}`);

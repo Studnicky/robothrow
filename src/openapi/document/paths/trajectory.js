@@ -11,24 +11,24 @@ Expected to return a Trajectory Instance
 `;
 
 module.exports = {
-	"/trajectory": {
+	'/trajectory': {
 		get: {
-			summary: "Get Account",
+			summary: 'Get Trajectory',
 			description: getTrajectoryDescription,
-			tags: ["Trajectory"],
+			tags: ['Trajectory'],
 			responses: {
 				200: {
-					$ref: "#/components/responses/trajectoryResponse",
-				},
+					$ref: '#/components/responses/trajectoryResponse'
+				}
 			},
 			parameters: [
 				{
-					$ref: "#/components/parameters/releaseAngleQuery",
+					$ref: '#/components/parameters/releaseAngleQuery'
 				},
 				{
-					$ref: "#/components/parameters/releaseVelocityQuery",
-				},
-			],
-		},
-	},
+					$ref: '#/components/parameters/releaseVelocityQuery'
+				}
+			]
+		}
+	}
 };

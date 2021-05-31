@@ -6,7 +6,7 @@ function getExportConfig(cliArgs) {
 	const { exportPath, fileName } = cliArgs;
 
 	return {
-		exportPath: exportPath || EXPORT_PATH,
+		exportDirectory: exportPath || EXPORT_PATH,
 		fileName: fileName || FILE_NAME
 	};
 }

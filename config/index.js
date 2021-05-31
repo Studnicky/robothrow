@@ -13,11 +13,15 @@ const envConfig = dotenv.config({
 });
 
 const app = require('./app');
-const loggerConfig = require( './logger' );
-const expressConfig = require( './express' );
+const loggerConfig = require('./logger');
+const expressConfig = require('./express');
 const openapiConfig = require('./openapi');
 const importConfig = require('./import')(cliArgs);
 const exportConfig = require('./export')(cliArgs);
+const physicsConfig = require('./physics');
+const dispatcherConfig = require('./dispatcher');
+const utilsConfig = require('./utils');
+const tosserConfig = require('./tosser');
 
 //  Create config from ENV
 const config = {
@@ -26,7 +30,12 @@ const config = {
 	import: importConfig,
 	export: exportConfig,
 	logger: loggerConfig[app.env],
-	express: expressConfig[app.env]
+	express: expressConfig[app.env],
+	physics: physicsConfig,
+	dispatcher: dispatcherConfig,
+	utils: utilsConfig,
+	tosser: tosserConfig,
+	cliArgs
 };
 
 module.exports = config;

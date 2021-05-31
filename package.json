@@ -1,20 +1,25 @@
 {
-	"name": "robothrow",
+	"name": "robo-throw",
 	"description": "Calculate Trajectory of a ball thrown by a robotic arm",
 	"config": {
-		"src": "./src/index.js",
+		"server": "./src/index.js",
+		"terminal": "./src/terminal.js",
 		"sonar_local_token": "",
 		"sonar_host": "http://localhost:9000"
 	},
 	"version": "0.0.0",
-	"main": "$npm_package_config_src",
+	"main": "$npm_package_config_server",
 	"private": true,
 	"scripts": {
-		"start": "node $npm_package_config_src",
+		"start": "node $npm_package_config_server",
+		"server": "node $npm_package_config_server",
+		"server:debug": "node-dev --inspect-brk=1337 $npm_package_config_server",
+		"terminal": "node $npm_package_config_terminal",
+		"terminal:debug": "node-dev --inspect-brk=1337 $npm_package_config_terminal",
+		"test": "JEST_WATCH=1 node node_modules/.bin/jest",
+		"test:debug": "JEST_WATCH=1 node --inspect --inspect-port=1337 node_modules/.bin/jest --forceExit --runInBand --detectOpenHandles",
 		"eslint": "eslint . --env node --cache --no-inline-config",
-		"debug": "node --inspect-brk=1337 $npm_package_config_src",
-		"test": "JEST_WATCH=1 node --inspect --inspect-port=1337 node_modules/.bin/jest --forceExit --runInBand --detectOpenHandles",
-		"sonar": "sonar-scanner -X -Dsonar.projectKey=robothrow -Dsonar.sources=$npm_package_config_src -Dsonar.exclusions=node_modules/** -Dsonar.host.url=$npm_package_config_sonar_host  -Dsonar.login=$npm_package_config_sonar_token"
+		"sonar": "sonar-scanner -X -Dsonar.projectKey=robothrow -Dsonar.sources=$npm_package_config_server -Dsonar.exclusions=node_modules/** -Dsonar.host.url=$npm_package_config_sonar_host  -Dsonar.login=$npm_package_config_sonar_token"
 	},
 	"repository": {
 		"type": "git",
@@ -34,13 +39,8 @@
 		"sample"
 	],
 	"devDependencies": {
-		"eslint": "^7.26.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-prettier": "^3.4.0",
 		"jest": "^26.6.3",
 		"node-dev": "^7.0.0",
-		"prettier": "^2.3.0",
-		"prettier-eslint": "^12.0.0",
 		"sonar-scanner": "^3.1.0"
 	},
 	"dependencies": {
@@ -49,7 +49,7 @@
 		"jsonschema": "^1.4.0",
 		"yargs": "^17.0.1",
 		"express": "^4.17.1",
-		"swagger-ui-express": "^4.1.6"
+		"swagger-ui-express": "~4.1.6"
 	},
 	"//": {
 		"Requirements": "https://www.notion.so/standardbots/Standard-Bots-Take-Home-Challenge-f318cfff1f0c4283ab327e2846c787bd"
