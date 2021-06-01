@@ -1,3 +1,5 @@
+---
+
 # robothrow Simulation Script
 
 ### Context
@@ -27,6 +29,8 @@ Your simulator should:
   GUI, etc) and instructions on how to run your submission.
 - Submit your solution to [jobs@standardbots.com](mailto:jobs@standardbots.com)
 
+---
+
 ## Running the project
 
 1. Install Node.js
@@ -51,7 +55,9 @@ You may copy `.env.example` to configure the project for the sample run.
 | EXPORT_PATH  | Export directory, relative to project root, default is `output` |
 | FILE_NAME    | File name prefix for file write output; default is `report`     |
 
-4. Running the script
+4. Running the Project
+
+- Running as Server
 
 To run the base project, simply invoke the npm default script.
 
@@ -59,25 +65,50 @@ To run the base project, simply invoke the npm default script.
 npm start
 ```
 
-For more advanced usage, such as running with command line arguments, follow these additional steps:
+- Running from command line:
 
-    1. Make the project source executable locally
+  1. Assign filesystem permissions to allow the project source to be executable locally:
 
-```bash
-chmod +x ./src/index.js
-```
+  ```bash
+  chmod +x ./src/terminal.js
+  ```
 
-    2. Execute with command line args by addressing the source executable directly
+  2. Check that the configuration and input are correct.
+     Terminal invokation requires a JSON structured file with an array of test cases.
+     The import path may be specified via CLI args or .env file.
 
-```bash
-./src/index.js --importPath=../target
-```
+  ```bash
+  # Import
+  IMPORT_PATH=./input/singleCase.json
+  ```
 
-All command line arguments use the same names, but in camelCase - CLI args will take precedence over ENV args.
-Example: `IMPORT_PATH === importPath`
+  3. Executing Terminal Invokation
 
-5. Output will be found in the directory specified by your config
+  - Execute the default terminal invokation:
+
+  ```bash
+  npm run terminal
+  ```
+
+  - Execute custom terminal invokation:
+
+  Execute with command line args by addressing the source executable directly with CLI args
+
+  All available command line arguments use the same names as .env vars, but in camelCase - CLI args will take precedence over ENV args.
+  Example: `IMPORT_PATH === importPath`
+
+  ```bash
+  ./src/terminal.js --importPath=./input/hundredCases.json
+  ```
+
+  4. Output will be found in the directory under the file name specified by the config
+
+  ```bash
+  # Export
+  EXPORT_PATH=output
+  FILE_NAME=test-run
+  ```
 
 #### Note
 
-The project includes a sample config in the `./sample` directory
+The project includes a sample config in the `./input` directory
