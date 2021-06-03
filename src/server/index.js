@@ -7,16 +7,16 @@ const swaggerUi = require('swagger-ui-express');
 const errors = require('../error');
 const logger = require('../logger');
 const routes = require('./routes');
-const openapi = require('../openapi');
+const openApi = require('../openApi');
 
 const app = express();
 app.logger = logger;
 
-openapi.exportDocument().then(() => {
+openApi.exportDocument().then(() => {
 	//  https://www.npmjs.com/package/swagger-ui-express
 	app.get(`/trajectory`, routes.trajectory);
-	app.get(`/${config.openapi.schemaFileName}`, routes.serveOpenApiDoc);
-	app.use('/', swaggerUi.serve, swaggerUi.setup(openapi.document));
+	app.get(`/${config.openApi.schemaFileName}`, routes.serveOpenApiDoc);
+	app.use('/', swaggerUi.serve, swaggerUi.setup(openApi.document));
 
 	const server = app.listen(config.express.port, () => {
 		app.logger.info(`${config.name} [${config.env}] API running on ${config.express.host}:${config.express.port}`);

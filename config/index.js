@@ -15,7 +15,7 @@ const envConfig = dotenv.config({
 const app = require('./app');
 const loggerConfig = require('./logger');
 const expressConfig = require('./express');
-const openapiConfig = require('./openapi');
+const openApiConfig = require('./openApi');
 const importConfig = require('./import')(cliArgs);
 const exportConfig = require('./export')(cliArgs);
 const physicsConfig = require('./physics');
@@ -26,7 +26,7 @@ const tosserConfig = require('./tosser');
 //  Create config from ENV
 const config = {
 	...app,
-	openapi: openapiConfig,
+	openApi: openApiConfig,
 	import: importConfig,
 	export: exportConfig,
 	logger: loggerConfig[app.env],

@@ -9,7 +9,7 @@ const rootPath = path.dirname(require.main.filename);
 const readMePath = path.resolve(rootPath, '../', 'README.md');
 const readme = fs.readFileSync(readMePath, 'utf-8');
 
-const sourceDocumentUrl = new URL(`${config.openapi.schemaFileName}`, `http://${config.express.host}:${config.express.port}`);
+const sourceDocumentUrl = new URL(`${config.openApi.schemaFileName}`, `http://${config.express.host}:${config.express.port}`);
 
 const openApiDescription = `
 
@@ -19,16 +19,16 @@ ${readme}
 
 ---
 
-### OpenAPI v3
+### openApi v3
 
-You can view and download this API specification as a raw JSON document here: [OpenAPI v3 Document](${sourceDocumentUrl.href})
+You can view and download this API specification as a raw JSON document here: [openApi v3 Document](${sourceDocumentUrl.href})
 
-The document adheres to the [OpenAPI v3](https://swagger.io/specification/) specification.
+The document adheres to the [openApi v3](https://swagger.io/specification/) specification.
 
-There is a large ecosystem or open source tools that support the OpenAPI v3 specification, a list of which may be found here: [OpenApi Tools](https://openapi.tools/)
+There is a large ecosystem or open source tools that support the openApi v3 specification, a list of which may be found here: [openApi Tools](https://openapi.tools/)
 
 For example, the JSON document may be imported into Postman to create a functional test suite:
-- [OpenApi Postman Suite](https://github.com/postmanlabs/openapi-to-postman)
+- [openApi Postman Suite](https://github.com/postmanlabs/openapi-to-postman)
 
 ---
 `;

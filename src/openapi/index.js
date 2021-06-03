@@ -1,8 +1,8 @@
-const config = require('../../config').openapi;
+const config = require('../../config').openApi;
 const logger = require('../logger');
 const methods = require('./methods');
 
-class Openapi {
+class OpenApi {
 	constructor() {
 		this.config = config;
 		this.logger = logger;
@@ -11,10 +11,10 @@ class Openapi {
 	}
 }
 
-Openapi.prototype._createDocument = methods._createDocument;
-Openapi.prototype._getRouteDefinitions = methods._getRouteDefinitions;
-Openapi.prototype._formatPathsObject = methods._formatPathsObject;
-Openapi.prototype.exportDocument = methods.exportDocument;
+OpenApi.prototype._createDocument = methods._createDocument;
+OpenApi.prototype._getRouteDefinitions = methods._getRouteDefinitions;
+OpenApi.prototype._formatPathsObject = methods._formatPathsObject;
+OpenApi.prototype.exportDocument = methods.exportDocument;
 
 //  A few of these just want arrays of values, so that's fine - just ignore the keys
-module.exports = new Openapi();
+module.exports = new OpenApi();
